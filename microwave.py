@@ -1,7 +1,10 @@
 #!/usr/bin/env python
 import requests
 import gevent
-from gevent import monkey; monkey.patch_socket()
+from gevent import monkey
+monkey.patch_socket()
+monkey.patch_ssl()
+
 from docopt import docopt
 from bs4 import BeautifulSoup
 
