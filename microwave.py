@@ -17,13 +17,14 @@ SHORT_DESC = 'cache warmer'
 __doc__ = """{2}
 
 Usage:
-    {0} <domain>
+    {0} [--ssl] <domain>
     {0} -h | --help
     {0} --version
 
 Options:
     -h --help                   Show this screen.
     --version                   Show version.
+    --ssl                       Use HTTPS.
 """.format(
     NAME,
     VERSION,
@@ -34,8 +35,15 @@ def touch(url):
     r = requests.get(url)
     print('[{1}] {0}'.format(url, r.status_code))
 
-def microwave(domain):
-    r = requests.get('http://{}/sitemap.xml'.format(domain))
+def microwave(domain, ssl=False):
+    if ssl:
+        protocol = 'https://'
+    else:
+        protocol = 'http://'
+    r = requests.get('{protocol}{domain}/sitemap.xml'.format(
+        protocol=protocol,
+        domain=domain
+    ))
     soup = BeautifulSoup(r.content)
     gevent.joinall([
         gevent.spawn(touch, url.get_text()) for url in soup.find_all('loc')
@@ -46,7 +54,7 @@ def main():
     args = docopt(__doc__, version='{} {}'.format(
         NAME,
         VERSION))
-    microwave(args['<domain>'])
+    microwave(args['<domain>'], ssl=args['--ssl'])
 
 if __name__ == '__main__':
     main()
