@@ -22,3 +22,7 @@
         microwave -h | --help
         microwave --version
 
+    Options:
+        -h --help                   Show this screen.
+        --version                   Show version.
+        --ssl                       Use HTTPS.
