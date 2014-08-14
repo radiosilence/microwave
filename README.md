@@ -7,6 +7,8 @@
     real traffic is encountered, very little of the requests
     do any real work.
 
+    It also displays status codes for handy 404 detection.
+
    
     Installation
     ------------
