@@ -16,6 +16,17 @@
     Clone, make a python 2 (because gevent) virtualenv, and then
     pip install -r requirements.txt
 
+    Tutorial
+    --------
+
+    microwave yoursite.com
+
+    Or for a https site:
+
+    microwave --ssl yoursite.com
+
+    Help
+    ----
 
     Usage:
         microwave [--ssl] <domain>
