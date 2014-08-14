@@ -48,6 +48,8 @@ def microwave(domain, ssl=False):
     gevent.joinall([
         gevent.spawn(touch, url.get_text()) for url in soup.find_all('loc')
     ])
+    
+    print u'\nDING!\n'
 
 
 def main():
